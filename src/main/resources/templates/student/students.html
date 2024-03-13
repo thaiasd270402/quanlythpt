@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h3>Danh sách sinh viên</h3>
+        <div style="text-align: right!important;">
+
+            Xin chào <b><span sec:authentication="principal.username"></span></b>
+            <form action="#" th:action="@{/logout}" method="post">
+                <input type="submit" value="Đăng xuất" class="btn btn-info" onclick="return confirm('Bạn có chắc muốn đăng xuất?');">
+            </form>
+        </div>
+
+
+
+
+        <a sec:authorize="hasAnyRole('ADMIN','MANAGER','TEACHER')" th:href="@{/students/create}" class="btn btn-success btn-sm mb-4">Thêm mới</a>
+        <table class="table table-bordered table-striped">
+            <thead class="table-info">
+            <tr>
+                <td>ID</td>
+                <td>LASTNAME</td>
+                <td>FIRSTNAME</td>
+                <td>EMAIL</td>
+                <td>XỬ LÝ</td>
+            </tr>
+
+            </thead>
+            <tbody th:each="student : ${students}">
+            <tr>
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.email}"></td>
+                <td>
+                    <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/students/update(id=${student.id})}" class="btn btn-warning btn-small">Chỉnh sửa</a>
+                    <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/students/delete(id=${student.id})}" class="btn btn-danger btn-small" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
