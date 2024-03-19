@@ -1,10 +1,10 @@
-package vn.titv.spring.demo;
+package com.example.demo_qlhs_c3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class DemoQlhsC3ApplicationTests {
 
 	@Test
 	void contextLoads() {
