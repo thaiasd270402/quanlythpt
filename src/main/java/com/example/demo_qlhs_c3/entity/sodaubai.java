@@ -16,14 +16,16 @@ public class sodaubai {
     @Column(name = "noi_dung_giang_day")
     private String noiDungGiangDay;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_lop_hoc", referencedColumnName = "id")
     private lop lop;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_giao_vien", referencedColumnName = "id")
     private giaovien giaoVien;
 
+    public sodaubai() {
+    }
 
     public int getId() {
         return id;

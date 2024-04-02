@@ -24,7 +24,7 @@ public class hocsinh {
     private String nienKhoa;
 
     @ManyToOne
-    @JoinColumn(name = "id_lop", nullable = false)
+    @JoinColumn(name = "id_lop")
     private lop lop;
     @OneToOne(mappedBy = "hocSinh")
     private thehocsinh theHocSinh;
@@ -40,7 +40,12 @@ public class hocsinh {
     private phuhuynh phuHuynh;
 
     @OneToMany(mappedBy = "hocSinh")
-    private List<hoc> hoc;
+    private List<phieudiem> phieuDiem;
+
+
+
+    public hocsinh() {
+    }
 
     public int getId() {
         return id;
@@ -122,11 +127,5 @@ public class hocsinh {
         this.phuHuynh = phuHuynh;
     }
 
-    public List<com.example.demo_qlhs_c3.entity.hoc> getHoc() {
-        return hoc;
-    }
 
-    public void setHoc(List<com.example.demo_qlhs_c3.entity.hoc> hoc) {
-        this.hoc = hoc;
-    }
 }

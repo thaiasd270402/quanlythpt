@@ -15,6 +15,9 @@ public class thehocsinh {
     @JoinColumn(name = "id_hoc_sinh", referencedColumnName = "id")
     private hocsinh hocSinh;
 
+    public thehocsinh() {
+    }
+
     public int getId() {
         return id;
     }

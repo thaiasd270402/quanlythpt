@@ -14,13 +14,42 @@ public class lop {
     @Column(name = "ten_lop")
     private String tenLop;
     @Column(name = "khoi_hoc")
-    private int khoiHoc;
+    private String khoiHoc;
+
+    @Column(name = "si_so")
+    private int siSo;
+
+
+
+    @OneToOne
+    @JoinColumn(name = "id_giao_vien", referencedColumnName = "id")
+    private giaovien giaoVien;
 
     @OneToOne(mappedBy = "lop")
     private sodaubai soDauBai;
 
     @OneToMany(mappedBy = "lop")
     private List<hocsinh> hocSinh;
+
+
+    public lop() {
+    }
+
+    public int getSiSo() {
+        return siSo;
+    }
+
+    public void setSiSo(int siSo) {
+        this.siSo = siSo;
+    }
+
+    public giaovien getGiaoVien() {
+        return giaoVien;
+    }
+
+    public void setGiaoVien(giaovien giaoVien) {
+        this.giaoVien = giaoVien;
+    }
 
     public sodaubai getSoDauBai() {
         return soDauBai;
@@ -54,11 +83,11 @@ public class lop {
         this.tenLop = tenLop;
     }
 
-    public int getKhoiHoc() {
+    public String getKhoiHoc() {
         return khoiHoc;
     }
 
-    public void setKhoiHoc(int khoiHoc) {
+    public void setKhoiHoc(String khoiHoc) {
         this.khoiHoc = khoiHoc;
     }
 }

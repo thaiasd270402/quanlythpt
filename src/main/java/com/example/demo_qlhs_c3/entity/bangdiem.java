@@ -24,6 +24,9 @@ public class bangdiem {
     @JoinColumn(name = "id_hoc_ba")
     private sohocba soHocBa;
 
+    public bangdiem() {
+    }
+
     public int getId() {
         return id;
     }
@@ -47,6 +50,8 @@ public class bangdiem {
     public void setDiemSo(float diemSo) {
         this.diemSo = diemSo;
     }
+
+
 
     public hocsinh getHocSinh() {
         return hocSinh;

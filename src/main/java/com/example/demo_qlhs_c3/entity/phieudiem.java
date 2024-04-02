@@ -18,12 +18,15 @@ public class phieudiem {
     @Column(name = "hoc_ky")
     private int hocKy;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_hoc_sinh" ,referencedColumnName = "id")
     private hocsinh hocSinh;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_mon_hoc", referencedColumnName = "id")
     private monhoc monHoc;
+
+    public phieudiem() {
+    }
 
     public int getId() {
         return id;

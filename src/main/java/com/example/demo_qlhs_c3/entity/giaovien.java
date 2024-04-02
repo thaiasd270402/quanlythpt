@@ -1,5 +1,6 @@
 package com.example.demo_qlhs_c3.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -25,8 +26,23 @@ public class giaovien {
     @JoinColumn(name = "id_mon_hoc")
     private monhoc monHoc;
 
-    @OneToMany(mappedBy = "giaoVien")
-    private List<tham_gia> thamGia;
+
+
+
+    @OneToOne(mappedBy = "giaoVien")
+    private lop lop;
+
+    public giaovien() {
+    }
+
+
+    public com.example.demo_qlhs_c3.entity.lop getLop() {
+        return lop;
+    }
+
+    public void setLop(com.example.demo_qlhs_c3.entity.lop lop) {
+        this.lop = lop;
+    }
 
     public monhoc getMonHoc() {
         return monHoc;
@@ -36,13 +52,7 @@ public class giaovien {
         this.monHoc = monHoc;
     }
 
-    public List<tham_gia> getThamGia() {
-        return thamGia;
-    }
 
-    public void setThamGia(List<tham_gia> thamGia) {
-        this.thamGia = thamGia;
-    }
 
     public int getId() {
         return id;

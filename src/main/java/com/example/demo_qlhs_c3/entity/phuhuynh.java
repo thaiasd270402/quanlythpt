@@ -25,6 +25,9 @@ public class phuhuynh {
     @JoinColumn(name = "id_hoc_sinh")
     private hocsinh hocSinh;
 
+    public phuhuynh() {
+    }
+
     public int getIdHocSinh() {
         return idHocSinh;
     }

@@ -15,11 +15,14 @@ public class sohocba {
     private String hanhKiem;
     @Column(name = "nhan_xet_cua_giao_vien")
     private String nhanXetCuaGiaoVien;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_hoc_sinh", referencedColumnName = "id")
     private hocsinh hocSinh;
     @OneToMany(mappedBy = "soHocBa")
     private List<bangdiem> bangDiem;
+
+    public sohocba() {
+    }
 
     public int getId() {
         return id;

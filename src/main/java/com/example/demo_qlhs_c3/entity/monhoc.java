@@ -20,11 +20,30 @@ public class monhoc {
     @OneToMany(mappedBy = "monHoc")
     private List<bangdiem> bangDiem;
 
-    @OneToMany(mappedBy = "monHoc")
-    private List<tham_gia> thamGia;
 
-    @OneToMany(mappedBy = "monHoc")
-    private List<hoc> hoc;
+
+
+
+
+    public monhoc() {
+    }
+
+    public monhoc(int id, String tenMonHoc, List<giaovien> giaoVien, List<bangdiem> bangDiem ) {
+        this.id = id;
+        this.tenMonHoc = tenMonHoc;
+        this.giaoVien = giaoVien;
+        this.bangDiem = bangDiem;
+
+
+    }
+
+    public monhoc(String tenMonHoc, List<giaovien> giaoVien, List<bangdiem> bangDiem ) {
+        this.tenMonHoc = tenMonHoc;
+        this.giaoVien = giaoVien;
+        this.bangDiem = bangDiem;
+
+
+    }
 
     public int getId() {
         return id;
@@ -58,19 +77,9 @@ public class monhoc {
         this.bangDiem = bangDiem;
     }
 
-    public List<tham_gia> getThamGia() {
-        return thamGia;
-    }
 
-    public void setThamGia(List<tham_gia> thamGia) {
-        this.thamGia = thamGia;
-    }
 
-    public List<com.example.demo_qlhs_c3.entity.hoc> getHoc() {
-        return hoc;
-    }
 
-    public void setHoc(List<com.example.demo_qlhs_c3.entity.hoc> hoc) {
-        this.hoc = hoc;
-    }
+
+
 }
