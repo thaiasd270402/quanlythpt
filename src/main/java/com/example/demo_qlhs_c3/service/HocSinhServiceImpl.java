@@ -46,4 +46,19 @@ public class HocSinhServiceImpl implements HocSinhService{
     public List<hocsinh> searchHocSinhByName(String name) {
         return hocSinhRepository.serchHocSinhByName(name);
     }
+
+    @Override
+    public List<hocsinh> searchName(String name) {
+        return hocSinhRepository.serchByName(name);
+    }
+
+    @Override
+    public List<hocsinh> searchLop(String name) {
+        return hocSinhRepository.serchByLop(name);
+    }
+
+    @Override
+    public List<hocsinh> searchNameAndClass(String name1, String name2) {
+        return hocSinhRepository.serchByNameAndLop(name1, name2);
+    }
 }

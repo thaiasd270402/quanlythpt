@@ -7,9 +7,9 @@ public interface SoHocBaService {
 
     public sohocba getSoHocBaById(int id);
 
-    public void saveSoHocBa(sohocba sohocba, int id);
+    public void updateSoHocBa(sohocba sohocba, int id);
 
-    public sohocba updateSoHocBa(sohocba sohocba);
+    public sohocba saveSoHocBa(sohocba sohocba);
 
     public void deleteSoHocBaById(int id);
 }

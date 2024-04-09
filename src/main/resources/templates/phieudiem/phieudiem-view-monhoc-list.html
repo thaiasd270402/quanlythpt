@@ -30,20 +30,22 @@
 
 
 <!--                <a th:href="@{/monhoc/creat}" type="button" class="btn btn-success" >Thêm</a>-->
+
                 <div class="d-flex justify-content-between pb-1">
                     <div >
 
                         <a th:href="@{/phieudiem/list-by-monhoc}" type="button" class="btn btn-primary active mb-1" >Trở lại</a>
                     </div>
-                    <form class="d-flex" action="#" th:action="@{/phieudiem/search}" method="get">
+                    <form class="d-flex" action="#" th:action="@{/phieudiem/search-in-form}" method="get">
+
                         <div class=" form-check">
-                            <input autocomplete="off" th:value="${keyword}" name="keyword" type="text" class="form-control" placeholder="Nhập tên cần tìm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="hidden" name="tenMonHoc" th:value="${phieuDiem.monHoc.tenMonHoc}" />
+                            <input autocomplete="off" th:value="${keyword}" name="keyword" type="text" class="form-control" placeholder="Nhập tên hoặc lớp" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </form>
 
                 </div>
-
                 <table class="table table-bordered table-striped">
                     <thead class="table-danger">
                     <tr>
@@ -56,7 +58,6 @@
                         <th scope="col">Điểm số</th>
                         <th scope="col">Ngày kiểm tra</th>
                         <th scope="col">Học kỳ</th>
-                        <!--                        <th scope="col">Giáo viên phụ trách</th>-->
                         <th scope="col">Xử lí</th>
                     </tr>
                     </thead>
@@ -74,8 +75,8 @@
                         <td th:text="${#dates.format(phieudiem.ngayKiemTra, 'dd-MM-yyyy')}" />
                         <td th:text="${phieudiem.hocKy != 0 ? phieudiem.hocKy : ''}" />
                         <td>
-                            <a th:href="@{/phieudiem/update(id=${phieudiem.id})}" type="button" class="btn btn-warning" >Chỉnh sửa</a>
-                            <a th:href="@{/phieudiem/creatphieudiem(id=${phieudiem.id})}" type="button" class="btn btn-success" >Thêm </a>
+                            <a th:href="@{/phieudiem/update-view-form(id=${phieudiem.id})}" type="button" class="btn btn-warning" >Chỉnh sửa</a>
+                            <a th:href="@{/phieudiem/creatphieudiem-inform(id=${phieudiem.id})}" type="button" class="btn btn-success" >Thêm </a>
                         </td>
 
                     </tr>

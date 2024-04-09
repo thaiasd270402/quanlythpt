@@ -3,6 +3,7 @@ package com.example.demo_qlhs_c3.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "phieu_diem")
@@ -19,9 +20,13 @@ public class phieudiem {
     private int hocKy;
 
     @ManyToOne
-    @JoinColumn(name = "id_hoc_sinh" ,referencedColumnName = "id")
+    @JoinColumn(name = "id_lop_hoc", referencedColumnName = "id")
+    private lop lop;
+
+    @ManyToOne
+    @JoinColumn(name = "id_hoc_sinh", referencedColumnName = "id")
     private hocsinh hocSinh;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_mon_hoc", referencedColumnName = "id")
     private monhoc monHoc;
 
@@ -75,4 +80,14 @@ public class phieudiem {
     public void setMonHoc(monhoc monHoc) {
         this.monHoc = monHoc;
     }
+
+    public com.example.demo_qlhs_c3.entity.lop getLop() {
+        return lop;
+    }
+
+    public void setLop(com.example.demo_qlhs_c3.entity.lop lop) {
+        this.lop = lop;
+    }
 }
+
+

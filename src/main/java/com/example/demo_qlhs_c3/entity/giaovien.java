@@ -27,10 +27,11 @@ public class giaovien {
     private monhoc monHoc;
 
 
-
-
     @OneToOne(mappedBy = "giaoVien")
     private lop lop;
+
+    @OneToMany(mappedBy = "giaoVien")
+    List<sodaubai> soDauBai;
 
     public giaovien() {
     }
@@ -92,5 +93,13 @@ public class giaovien {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    public List<sodaubai> getSoDauBai() {
+        return soDauBai;
+    }
+
+    public void setSoDauBai(List<sodaubai> soDauBai) {
+        this.soDauBai = soDauBai;
     }
 }

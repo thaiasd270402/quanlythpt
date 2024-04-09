@@ -36,7 +36,7 @@
                     </div>
                     <form class="d-flex" action="#" th:action="@{/hocsinh/search}" method="get">
                             <div class=" form-check">
-                                <input autocomplete="off" name="keyword" type="text" class="form-control" placeholder="Nhập tên cần tìm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input autocomplete="off" th:value="${tenHocSinh}" name="keyword" type="text" class="form-control" placeholder="Nhập tên cần tìm" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </form>

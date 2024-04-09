@@ -25,11 +25,14 @@ public class lop {
     @JoinColumn(name = "id_giao_vien", referencedColumnName = "id")
     private giaovien giaoVien;
 
-    @OneToOne(mappedBy = "lop")
-    private sodaubai soDauBai;
+    @OneToMany(mappedBy = "lop")
+    private List<sodaubai> soDauBai;
 
     @OneToMany(mappedBy = "lop")
     private List<hocsinh> hocSinh;
+
+    @OneToMany(mappedBy = "lop")
+    private List<phieudiem> phieuDiem;
 
 
     public lop() {
@@ -51,11 +54,11 @@ public class lop {
         this.giaoVien = giaoVien;
     }
 
-    public sodaubai getSoDauBai() {
+    public List<sodaubai> getSoDauBai() {
         return soDauBai;
     }
 
-    public void setSoDauBai(sodaubai soDauBai) {
+    public void setSoDauBai(List<sodaubai> soDauBai) {
         this.soDauBai = soDauBai;
     }
 
@@ -89,5 +92,13 @@ public class lop {
 
     public void setKhoiHoc(String khoiHoc) {
         this.khoiHoc = khoiHoc;
+    }
+
+    public List<phieudiem> getPhieuDiem() {
+        return phieuDiem;
+    }
+
+    public void setPhieuDiem(List<phieudiem> phieuDiem) {
+        this.phieuDiem = phieuDiem;
     }
 }

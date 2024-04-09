@@ -16,11 +16,11 @@ public class sodaubai {
     @Column(name = "noi_dung_giang_day")
     private String noiDungGiangDay;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_lop_hoc", referencedColumnName = "id")
     private lop lop;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_giao_vien", referencedColumnName = "id")
     private giaovien giaoVien;
 

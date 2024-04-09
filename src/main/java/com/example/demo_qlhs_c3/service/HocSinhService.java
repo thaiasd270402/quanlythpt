@@ -16,5 +16,9 @@ public interface HocSinhService {
 
     public List<hocsinh> searchHocSinhByName(String name);
 
+    public List<hocsinh> searchName(String name);
+    public List<hocsinh> searchLop(String name);
+
+    public List<hocsinh> searchNameAndClass(String name1, String name2);
 
 }

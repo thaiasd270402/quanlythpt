@@ -2,6 +2,7 @@ package com.example.demo_qlhs_c3.service;
 
 import com.example.demo_qlhs_c3.entity.sohocba;
 import com.example.demo_qlhs_c3.repository.SoHocBaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +23,20 @@ public class SoHocBaServiceImpl implements SoHocBaService{
     }
 
     @Override
-    public void saveSoHocBa(sohocba sohocba, int id) {
+    @Transactional
+    public void updateSoHocBa(sohocba sohocba, int id) {
         sohocba.setId(id);
         soHocBaRepository.save(sohocba);
     }
 
     @Override
-    public sohocba updateSoHocBa(sohocba sohocba) {
+    @Transactional
+    public sohocba saveSoHocBa(sohocba sohocba) {
         return soHocBaRepository.saveAndFlush(sohocba);
     }
 
     @Override
+    @Transactional
     public void deleteSoHocBaById(int id) {
         soHocBaRepository.deleteById(id);
     }

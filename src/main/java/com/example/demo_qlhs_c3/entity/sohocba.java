@@ -11,6 +11,11 @@ public class sohocba {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "diem_trung_binh")
+    private Float diemTrungBinh;
+    @Column(name = "hoc_luc")
+    private String hocLuc;
     @Column(name = "hanh_kiem")
     private String hanhKiem;
     @Column(name = "nhan_xet_cua_giao_vien")
@@ -18,8 +23,7 @@ public class sohocba {
     @OneToOne
     @JoinColumn(name = "id_hoc_sinh", referencedColumnName = "id")
     private hocsinh hocSinh;
-    @OneToMany(mappedBy = "soHocBa")
-    private List<bangdiem> bangDiem;
+
 
     public sohocba() {
     }
@@ -56,11 +60,20 @@ public class sohocba {
         this.hocSinh = hocSinh;
     }
 
-    public List<bangdiem> getBangDiem() {
-        return bangDiem;
+
+    public Float getDiemTrungBinh() {
+        return diemTrungBinh;
     }
 
-    public void setBangDiem(List<bangdiem> bangDiem) {
-        this.bangDiem = bangDiem;
+    public void setDiemTrungBinh(Float diemTrungBinh) {
+        this.diemTrungBinh = diemTrungBinh;
+    }
+
+    public String getHocLuc() {
+        return hocLuc;
+    }
+
+    public void setHocLuc(String hocLuc) {
+        this.hocLuc = hocLuc;
     }
 }

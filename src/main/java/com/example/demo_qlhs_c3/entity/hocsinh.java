@@ -29,8 +29,6 @@ public class hocsinh {
     @OneToOne(mappedBy = "hocSinh")
     private thehocsinh theHocSinh;
 
-    @OneToMany(mappedBy = "hocSinh")
-    private List<bangdiem> bangDiem;
 
     @OneToOne(mappedBy = "hocSinh")
     private sohocba soHocBa;
@@ -39,12 +37,28 @@ public class hocsinh {
     @PrimaryKeyJoinColumn
     private phuhuynh phuHuynh;
 
-    @OneToMany(mappedBy = "hocSinh")
+    @OneToMany(mappedBy = "hocSinh", cascade = CascadeType.ALL)
     private List<phieudiem> phieuDiem;
 
 
 
     public hocsinh() {
+    }
+
+    public sohocba getSoHocBa() {
+        return soHocBa;
+    }
+
+    public void setSoHocBa(sohocba soHocBa) {
+        this.soHocBa = soHocBa;
+    }
+
+    public List<phieudiem> getPhieuDiem() {
+        return phieuDiem;
+    }
+
+    public void setPhieuDiem(List<phieudiem> phieuDiem) {
+        this.phieuDiem = phieuDiem;
     }
 
     public int getId() {
@@ -109,14 +123,6 @@ public class hocsinh {
 
     public void setTheHocSinh(thehocsinh theHocSinh) {
         this.theHocSinh = theHocSinh;
-    }
-
-    public List<bangdiem> getBangDiem() {
-        return bangDiem;
-    }
-
-    public void setBangDiem(List<bangdiem> bangDiem) {
-        this.bangDiem = bangDiem;
     }
 
     public phuhuynh getPhuHuynh() {

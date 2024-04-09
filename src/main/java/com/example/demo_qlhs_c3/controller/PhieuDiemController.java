@@ -1,18 +1,20 @@
 package com.example.demo_qlhs_c3.controller;
 
+import com.example.demo_qlhs_c3.entity.*;
 import com.example.demo_qlhs_c3.service.HocSinhService;
+import com.example.demo_qlhs_c3.service.LopHocService;
 import com.example.demo_qlhs_c3.service.MonHocService;
 import com.example.demo_qlhs_c3.service.PhieuDIemService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.example.demo_qlhs_c3.entity.phieudiem;
-import com.example.demo_qlhs_c3.entity.monhoc;
-import org.springframework.web.bind.annotation.RequestParam;
-import com.example.demo_qlhs_c3.entity.hocsinh;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,40 +28,212 @@ public class PhieuDiemController {
 
     @Autowired
     private HocSinhService hocSinhService;
+    @Autowired
+    private LopHocService lopHocService;
 
-//    @GetMapping("/list")
-//    public String list(Model model){
-//      List<phieudiem> phieudiemList =  phieuDiemService.getAllPhieuDiem();
-//
-//      model.addAttribute("phieudiemList", phieudiemList);
-//
-//      return ("phieudiem/phieudiem");
-//    }
+    @PostConstruct
+    public void insert_all_hocsinh() {
+
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+        List<hocsinh> hocsinhList = hocSinhService.getAllHocSinh();
+        List<monhoc> monhocList = monHocService.getAllMonHoc();
+        if (phieudiemList.isEmpty()) {
+            for (hocsinh hocsinh1 : hocsinhList) {
+                for (monhoc monhoc : monhocList) {
+                    phieudiem phieudiem1 = new phieudiem();
+                    phieudiem1.setLop(hocsinh1.getLop());
+                    phieudiem1.setHocSinh(hocsinh1);
+                    phieudiem1.setMonHoc(monhoc);
+                    phieuDiemService.savePhieuDiem(phieudiem1);
+                }
+            }
+        }
+
+
+    }
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<monhoc> monhocList = monHocService.getAllMonHoc();
-        model.addAttribute("monhocList", monhocList);
-//        List<phieudiem> phieudiemList =  phieuDiemService.getAllPhieuDiem();
-//
-//        model.addAttribute("phieudiemList", phieudiemList);
+    public String list(Model model) {
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+        model.addAttribute("phieudiemList", phieudiemList);
 
-        return ("phieudiem/phieudiem");
+        return ("phieudiem/phieudiem-list");
     }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") int id, Model model) {
+        phieudiem phieudiem = phieuDiemService.getPhieuDiemById(id);
+
+        model.addAttribute("phieudiem", phieudiem);
+
+        return ("phieudiem/phieudiem-form");
+    }
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute("phieudiem") phieudiem phieudiem) {
+
+        int id = phieudiem.getId();
+        phieuDiemService.updatePhieuDiem(phieudiem, id);
+
+        return "redirect:/phieudiem/list";
+    }
+
+    @GetMapping("/creatphieudiem")
+    public String creatphieudiem(@RequestParam("id") int id, Model model) {
+        phieudiem phieudiem = phieuDiemService.getPhieuDiemById(id);
+        phieudiem phieudiem1 = new phieudiem();
+        phieudiem.setDiemSo(phieudiem1.getDiemSo());
+        phieudiem.setNgayKiemTra(phieudiem1.getNgayKiemTra());
+        phieudiem.setHocKy(phieudiem1.getHocKy());
+        model.addAttribute("phieudiem", phieudiem);
+
+        return ("phieudiem/phieudiem-form-save");
+    }
+
+    @GetMapping("/creatphieudiem-inform")
+    public String creatphieudieminform(@RequestParam("id") int id, Model model) {
+        phieudiem phieudiem = phieuDiemService.getPhieuDiemById(id);
+        phieudiem phieudiem1 = new phieudiem();
+        phieudiem.setDiemSo(phieudiem1.getDiemSo());
+        phieudiem.setNgayKiemTra(phieudiem1.getNgayKiemTra());
+        phieudiem.setHocKy(phieudiem1.getHocKy());
+        model.addAttribute("phieudiem", phieudiem);
+
+        return ("phieudiem/phieudiem-form-save-view");
+    }
+
+    @PostMapping("/savephieudiem")
+    public String savephieudiem(@ModelAttribute("phieudiem") phieudiem phieudiem) {
+
+        phieuDiemService.savePhieuDiem(phieudiem);
+
+        return "redirect:/phieudiem/list";
+    }
+
+    @PostMapping("/savephieudiem-inform")
+    public String savephieudieminform(@ModelAttribute("phieudiem") phieudiem phieudiem) {
+
+        phieuDiemService.savePhieuDiem(phieudiem);
+
+        return "redirect:/phieudiem/getdetail?id=" + phieudiem.getMonHoc().getId();
+    }
+
 
     @GetMapping("/getdetail")
-    public String listDetail(@RequestParam("id") int id,  Model model){
-        monhoc monhoc = monHocService.getMonHocById(id);
-        model.addAttribute("monhoc", monhoc);
+    public String detail(@RequestParam("id") int id, Model model) {
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+        List<phieudiem> phieudiems = new ArrayList<>();
 
-        List<hocsinh> hocsinhList = hocSinhService.getAllHocSinh();
-        model.addAttribute("hocsinhList" ,hocsinhList);
 
-//        model.addAttribute("monhocList", monhocList);
-//        List<phieudiem> phieudiemList =  phieuDiemService.getAllPhieuDiem();
-//
-//        model.addAttribute("phieudiemList", phieudiemList);
+        for (phieudiem phieudiem : phieudiemList) {
+            if (phieudiem.getMonHoc().getId() == id) {
+                phieudiems.add(phieudiem);
+            }
+        }
 
-        return ("phieudiem/phieudiem");
+        phieudiem phieudiem = phieudiems.get(0);
+        model.addAttribute("phieuDiem", phieudiem);
+
+        model.addAttribute("phieudiemList", phieudiems);
+
+        return ("phieudiem/phieudiem-view-monhoc-list");
     }
+
+    @GetMapping("/list-by-monhoc")
+    public String listByMonHoc(Model model) {
+        List<monhoc> monhocList = monHocService.getAllMonHoc();
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+        List<hocsinh> hocsinhList = hocSinhService.getAllHocSinh();
+        for (hocsinh hocsinh : hocsinhList) {
+            int i = 0;
+            for (phieudiem phieudiem : phieudiemList) {
+                i++;
+                if (hocsinh.getId() == phieudiem.getHocSinh().getId()) {
+                    break;
+                }
+                if (i == phieudiemList.size()) {
+                    for (monhoc monhoc : monhocList) {
+                        phieudiem phieudiem1 = new phieudiem();
+                        phieudiem1.setLop(hocsinh.getLop());
+                        phieudiem1.setHocSinh(hocsinh);
+                        phieudiem1.setMonHoc(monhoc);
+                        phieuDiemService.savePhieuDiem(phieudiem1);
+                    }
+                }
+
+
+            }
+
+
+        }
+        model.addAttribute("monhocList", monhocList);
+        return ("phieudiem/phieudiem-view-monhoc");
+    }
+
+    @GetMapping("/update-view-form")
+    public String updateViewForm(@RequestParam("id") int id, Model model) {
+        phieudiem phieudiem = phieuDiemService.getPhieuDiemById(id);
+
+        model.addAttribute("phieudiem", phieudiem);
+
+        return ("phieudiem/phieudiem-view-form");
+    }
+
+    @PostMapping("/save-view-form")
+    public String saveViewForm(@ModelAttribute("phieudiem") phieudiem phieudiem) {
+        int id = phieudiem.getId();
+        phieuDiemService.updatePhieuDiem(phieudiem, id);
+
+        return "redirect:/phieudiem/getdetail?id=" + phieudiem.getMonHoc().getId();
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("keyword") String keyword, Model model) {
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+        if (keyword != null) {
+            phieudiemList = phieuDiemService.searchPhieuDiemByName(keyword);
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("phieudiemList", phieudiemList);
+
+        return ("phieudiem/phieudiem-list");
+    }
+
+    @GetMapping("/search-in-form")
+    public String searchInForm(@ModelAttribute("keyword") String keyword, @ModelAttribute("tenMonHoc") String tenmonhoc, Model model) {
+
+        List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
+
+        //list này sẽ lưu trữ 1 list phieuDiem của 1 môn học
+        List<phieudiem> phieudiems = new ArrayList<>();
+
+        for (phieudiem phieudiem2 : phieudiemList) {
+            if (phieudiem2.getMonHoc().getTenMonHoc().equals(tenmonhoc)) {
+                phieudiems.add(phieudiem2);
+            }
+        }
+
+        //nếu giá trị nhập vào khác null sẽ tiến hành tìm kiếm
+        if (keyword != null) {
+            phieudiems = phieuDiemService.searchPhieuDiemInForm(keyword, tenmonhoc);
+        }
+        model.addAttribute("phieudiemList", phieudiems);
+
+        //Lấy ra phieuDiem ứng với tên môn học từ bên client gửi về
+        phieudiem phieudiem1 = new phieudiem();
+        for (phieudiem phieudiem2 : phieudiemList) {
+            if (phieudiem2.getMonHoc().getTenMonHoc().equals(tenmonhoc)) {
+                phieudiem1 = phieudiem2;
+                break;
+            }
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("phieuDiem", phieudiem1);
+
+        return ("phieudiem/phieudiem-view-monhoc-list");
+    }
+
+
 }

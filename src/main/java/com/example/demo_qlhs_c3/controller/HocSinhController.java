@@ -70,7 +70,7 @@ public class HocSinhController {
         if(name!=null){
             hocsinhList = hocSinhService.searchHocSinhByName(name);
         }
-
+        model.addAttribute("tenHocSinh", name);
         model.addAttribute("hocsinhs", hocsinhList);
         return ("hocsinh/hocsinh");
     }
