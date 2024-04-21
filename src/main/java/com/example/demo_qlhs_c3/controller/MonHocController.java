@@ -29,6 +29,20 @@ public class MonHocController {
         int countMonHoc = list.size();
         model.addAttribute("countMonHoc", countMonHoc);
         model.addAttribute("monhocs", list);
+
+
+        List<giaovien> giaovienList = giaoVienService.getAllGiaoVien();
+        List<monhoc> monhocList = new ArrayList<>(list);
+        for (monhoc monhoc1: list){
+            for (giaovien giaovien1 : giaovienList){
+                if(monhoc1.getId()==giaovien1.getMonHoc().getId()){
+                    monhocList.remove(monhoc1);
+                    break;
+                }
+            }
+        }
+        model.addAttribute("monhocList", monhocList);
+
         return "monhoc/monhoc";
     }
 

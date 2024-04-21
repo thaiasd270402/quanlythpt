@@ -1,8 +1,18 @@
-
 <nav th:fragment="head" class="navbar navbar-expand-lg navbar-light bg-info ps-5 pe-5 d-flex justify-content-between">
     <a th:href="@{/home}" class="navbar-brand" href="#">Trường THPT Lý Thái Tổ</a>
 
-    <div>Xin chào...</div>
+    <div class="d-flex">
+        <div style="padding-top: 8px;padding-right: 4px;">
+            Xin chào
+            <b><span sec:authentication="principal.username"></span><span>!</span></b>
+        </div>
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="Đăng xuất" class="btn btn-danger"
+                   onclick="return confirm('Bạn có chắc muốn đăng xuất?');">
+        </form>
+    </div>
+
+
 </nav>
 
 

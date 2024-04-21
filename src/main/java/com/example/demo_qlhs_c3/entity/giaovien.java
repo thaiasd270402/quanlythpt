@@ -27,7 +27,7 @@ public class giaovien {
     private monhoc monHoc;
 
 
-    @OneToOne(mappedBy = "giaoVien")
+    @OneToOne(mappedBy = "giaoVien" )
     private lop lop;
 
     @OneToMany(mappedBy = "giaoVien")

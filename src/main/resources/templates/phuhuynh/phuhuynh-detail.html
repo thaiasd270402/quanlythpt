@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<!--    Start header-->
+<nav th:replace="header :: head"></nav>
+<!--End header-->
+
+
+<!--Start main-->
+<div>
+    <div class="container mt-4 ">
+        <div class="row">
+            <div class="col-lg-3 " style="border-right: 3px solid #ccc;">
+                <div th:replace="left::left"></div>
+            </div>
+
+            <div class="col-lg-9">
+
+                <!-- Products -->
+                <!--                <div class="row">-->
+
+                <!--                </div>-->
+
+
+                <div class="d-flex">
+                    <h2>Quản lý phụ huynh lớp </h2>
+                    <h2 style="margin-left: 4px;" th:text="${tenLop}"></h2>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a th:href="@{/phuhuynh/list}" type="button" class="btn btn-info mb-1">Trở lại</a>
+                    <form class="d-flex" action="#" th:action="@{/phuhuynh/search-inform}" method="get">
+                        <!--                        <input autocomplete="off"  th:value="${idLop}" name="idlop" type="date" class="form-control"  id="tenLop" aria-describedby="emailHelp" style="display : none;">-->
+                        <div class=" form-check">
+                            <input autocomplete="off"  th:value="${tenHocSinh}" name="keyword1" type="text" class="form-control" placeholder="Nhập tên học sinh" id="keyword1" aria-describedby="emailHelp" >
+
+                        </div>
+
+                        <div class=" form-check">
+                            <input autocomplete="off"  th:value="${tenPhuHuynh}" name="keyword2" type="text" class="form-control" placeholder="Nhập tên phụ huynh" id="keyword2" aria-describedby="emailHelp" >
+
+                        </div>
+                        <input type="hidden"  name="idLop" th:value="${idLop}" />
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    </form>
+
+
+                </div>
+
+
+                <table class="table table-bordered table-striped">
+                    <thead class="table-danger">
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên phụ huynh</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Quê Quán</th>
+                        <th scope="col">SĐT</th>
+                        <th scope="col">Là cha/mẹ của</th>
+                        <th scope="col">Xử lí</th>
+                    </tr>
+                    </thead>
+                    <tbody th>
+                    <tr th:each="phuhuynh, index: ${phuhuynhs}">
+                        <td th:text="${index.count}"/>
+                        <td th:text="${phuhuynh.tenPhuHuynh}"/>
+                        <td th:text="${#dates.format(phuhuynh.ngaySinh, 'dd-MM-yyyy')}"/>
+                        <td th:text="${phuhuynh.gioiTinh}"/>
+                        <td th:text="${phuhuynh.queQuan}"/>
+                        <td th:text="${phuhuynh.soDienThoai}"/>
+                        <td th:text="${phuhuynh.hocSinh.tenHocSinh}"/>
+                        <td>
+                            <a th:href="@{/phuhuynh/update(id=${phuhuynh.idHocSinh})}" type="button" class="btn btn-warning">Chỉnh sửa</a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Products -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--End main-->
+
+<!-- Footer -->
+<footer th:replace="footer::foot"></footer>
+<!-- End footer -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<!--<script>-->
+<!--    function showForm() {-->
+<!--    document.getElementById("editForm").style.display = "block";-->
+<!--    document.getElementById("idSuccess").style.display = "none";-->
+<!--  }-->
+<!--</script>-->
+</body>
+</html>

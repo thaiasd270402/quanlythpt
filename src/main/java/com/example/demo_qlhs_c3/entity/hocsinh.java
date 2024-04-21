@@ -26,18 +26,18 @@ public class hocsinh {
     @ManyToOne
     @JoinColumn(name = "id_lop")
     private lop lop;
-    @OneToOne(mappedBy = "hocSinh")
+    @OneToOne(mappedBy = "hocSinh", cascade = CascadeType.ALL)
     private thehocsinh theHocSinh;
 
 
-    @OneToOne(mappedBy = "hocSinh")
+    @OneToOne(mappedBy = "hocSinh",  cascade = CascadeType.ALL)
     private sohocba soHocBa;
 
-    @OneToOne(mappedBy = "hocSinh")
+    @OneToOne(mappedBy = "hocSinh",  cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private phuhuynh phuHuynh;
 
-    @OneToMany(mappedBy = "hocSinh", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hocSinh",  cascade = CascadeType.ALL)
     private List<phieudiem> phieuDiem;
 
 

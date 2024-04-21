@@ -27,6 +27,7 @@
 
                 <!--                </div>-->
 
+                <h2 style="text-align: center;">Quản lý môn học</h2>
 
                 <a th:href="@{/monhoc/creat}" type="button" class="btn btn-success" >Thêm</a>
 
@@ -47,9 +48,11 @@
                         <td>
 
                             <a th:href="@{/monhoc/update(id=${monhoc.id})}" type="button" class="btn btn-warning" >Chỉnh sửa</a>
-                            <a th:href="@{/monhoc/delete(id=${monhoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>
+<!--                            <a th:href="@{/monhoc/delete(id=${monhoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>-->
                             <a th:href="@{/monhoc/detail(id=${monhoc.id})}" type="button" class="btn btn-primary" >Xem chi tiết</a>
-
+                            <span th:each="monHoc : ${monhocList}">
+                                <a th:if="${monHoc.id==monhoc.id}" th:href="@{/monhoc/delete(id=${monhoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>
+                            </span>
                         </td>
 
                     </tr>

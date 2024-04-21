@@ -27,7 +27,7 @@
 
                 <!--                </div>-->
 
-
+                <h2 style="text-align: center;">Quản lý giáo viên</h2>
                 <a th:href="@{/giaovien/creat}" type="button" class="btn btn-success" >Thêm giáo viên</a>
 
                 <table class="table table-bordered table-striped">
@@ -56,6 +56,8 @@
                             <span th:each="giaoVien : ${listGiaoVien}">
                                 <a th:if="${giaoVien.id==giaovien.id}" th:href="@{/giaovien/delete(id=${giaovien.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>
                             </span>
+
+<!--                            <a  th:href="@{/giaovien/delete(id=${giaovien.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>-->
 
 
                         </td>

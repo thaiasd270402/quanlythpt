@@ -12,4 +12,6 @@ public interface SoHocBaService {
     public sohocba saveSoHocBa(sohocba sohocba);
 
     public void deleteSoHocBaById(int id);
+
+
 }

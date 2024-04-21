@@ -15,4 +15,6 @@ public interface LopHocService {
     public lop updateLopHoc(lop lop);
 
     public void deleteLopHocById(int id);
+
+    public List<lop> serchByTenLop(String name);
 }

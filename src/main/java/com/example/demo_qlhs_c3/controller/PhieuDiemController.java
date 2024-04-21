@@ -188,49 +188,69 @@ public class PhieuDiemController {
     }
 
     @GetMapping("/search")
-    public String search(@ModelAttribute("keyword") String keyword, Model model) {
+    public String search(@RequestParam("keyword1") String tenHocSinh,
+                         @RequestParam("keyword2") String tenLop,
+                         @RequestParam("keyword3") String tenMonHoc,
+                         Model model) {
         List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
-        if (keyword != null) {
-            phieudiemList = phieuDiemService.searchPhieuDiemByName(keyword);
+        if ((tenHocSinh == null || tenHocSinh.isEmpty()) && (tenLop == null || tenLop.isEmpty())) {
+            phieudiemList = phieuDiemService.serchPhieuDiemByMonHoc(tenMonHoc);
+        } else if((tenHocSinh == null || tenHocSinh.isEmpty()) && (tenMonHoc == null || tenMonHoc.isEmpty())){
+            phieudiemList = phieuDiemService.serchPhieuDiemByLop(tenLop);
+        }else if((tenLop == null || tenLop.isEmpty()) && (tenMonHoc == null || tenMonHoc.isEmpty())){
+            phieudiemList = phieuDiemService.serchPhieuDiemByTenHocSinh(tenHocSinh);
+        }else if(tenHocSinh == null || tenHocSinh.isEmpty()){
+            phieudiemList = phieuDiemService.serchPhieuDiemByTenLopAndMonHoc(tenLop, tenMonHoc);
+        }else if(tenLop == null || tenLop.isEmpty()){
+            phieudiemList = phieuDiemService.serchPhieuDiemByTenHocSinhAndMonHoc(tenHocSinh, tenMonHoc);
+        }else if(tenMonHoc == null || tenMonHoc.isEmpty()){
+            phieudiemList = phieuDiemService.serchPhieuDiemByTenHocSinhAndLop( tenHocSinh, tenLop);
+        }else{
+            phieudiemList =
+                    phieuDiemService.serchPhieuDiemByTenHocSinh_Lop_MonHoc(tenHocSinh, tenLop, tenMonHoc);
         }
 
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("tenHocSinh", tenHocSinh);
+        model.addAttribute("tenLop", tenLop);
+        model.addAttribute("tenMonHoc", tenMonHoc);
         model.addAttribute("phieudiemList", phieudiemList);
 
         return ("phieudiem/phieudiem-list");
     }
 
     @GetMapping("/search-in-form")
-    public String searchInForm(@ModelAttribute("keyword") String keyword, @ModelAttribute("tenMonHoc") String tenmonhoc, Model model) {
+    public String searchInForm(@RequestParam("keyword1") String tenHocSinh,
+                               @RequestParam("keyword2") String tenLop,
+                               @RequestParam("tenMonHoc") String tenMonHoc, Model model) {
 
         List<phieudiem> phieudiemList = phieuDiemService.getAllPhieuDiem();
-
-        //list này sẽ lưu trữ 1 list phieuDiem của 1 môn học
         List<phieudiem> phieudiems = new ArrayList<>();
-
-        for (phieudiem phieudiem2 : phieudiemList) {
-            if (phieudiem2.getMonHoc().getTenMonHoc().equals(tenmonhoc)) {
-                phieudiems.add(phieudiem2);
+        for(phieudiem phieudiem1 : phieudiemList){
+            if(phieudiem1.getMonHoc().getTenMonHoc().equals(tenMonHoc)){
+                phieudiems.add(phieudiem1);
             }
         }
 
-        //nếu giá trị nhập vào khác null sẽ tiến hành tìm kiếm
-        if (keyword != null) {
-            phieudiems = phieuDiemService.searchPhieuDiemInForm(keyword, tenmonhoc);
+        if(tenHocSinh == null || tenHocSinh.isEmpty()){
+            phieudiems = phieuDiemService.serchPhieuDiemByTenLopAndMonHoc(tenLop, tenMonHoc);
+        }else if(tenLop == null || tenLop.isEmpty()){
+            phieudiems = phieuDiemService.serchPhieuDiemByTenHocSinhAndMonHoc(tenHocSinh, tenMonHoc);
+        }else {
+            phieudiems =
+                    phieuDiemService.serchPhieuDiemByTenHocSinh_Lop_MonHoc(tenHocSinh, tenLop, tenMonHoc);
         }
+
+
+        model.addAttribute("tenHocSinh", tenHocSinh);
+        model.addAttribute("tenLop", tenLop);
+        monhoc monhoc = new monhoc();
+        monhoc.setTenMonHoc(tenMonHoc);
+        phieudiem phieudiem = new phieudiem();
+        phieudiem.setMonHoc(monhoc);
+//        phieudiem phieudiem = phieudiems.get(0);
+        model.addAttribute("phieuDiem", phieudiem);
+
         model.addAttribute("phieudiemList", phieudiems);
-
-        //Lấy ra phieuDiem ứng với tên môn học từ bên client gửi về
-        phieudiem phieudiem1 = new phieudiem();
-        for (phieudiem phieudiem2 : phieudiemList) {
-            if (phieudiem2.getMonHoc().getTenMonHoc().equals(tenmonhoc)) {
-                phieudiem1 = phieudiem2;
-                break;
-            }
-        }
-
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("phieuDiem", phieudiem1);
 
         return ("phieudiem/phieudiem-view-monhoc-list");
     }

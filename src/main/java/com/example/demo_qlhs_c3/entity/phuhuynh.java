@@ -20,12 +20,21 @@ public class phuhuynh {
     private String gioiTinh;
     @Column(name = "sdt")
     private String soDienThoai;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @MapsId
     @JoinColumn(name = "id_hoc_sinh")
     private hocsinh hocSinh;
 
     public phuhuynh() {
+    }
+
+    public phuhuynh(int idHocSinh, String tenPhuHuynh, Date ngaySinh, String queQuan, String gioiTinh, String soDienThoai) {
+        this.idHocSinh = idHocSinh;
+        this.tenPhuHuynh = tenPhuHuynh;
+        this.ngaySinh = ngaySinh;
+        this.queQuan = queQuan;
+        this.gioiTinh = gioiTinh;
+        this.soDienThoai = soDienThoai;
     }
 
     public int getIdHocSinh() {
@@ -82,5 +91,18 @@ public class phuhuynh {
 
     public void setHocSinh(hocsinh hocSinh) {
         this.hocSinh = hocSinh;
+    }
+
+    @Override
+    public String toString() {
+        return "phuhuynh{" +
+                "idHocSinh=" + idHocSinh +
+                ", tenPhuHuynh='" + tenPhuHuynh + '\'' +
+                ", ngaySinh=" + ngaySinh +
+                ", queQuan='" + queQuan + '\'' +
+                ", gioiTinh='" + gioiTinh + '\'' +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                ", hocSinh=" + hocSinh +
+                '}';
     }
 }

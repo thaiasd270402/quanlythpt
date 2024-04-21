@@ -54,4 +54,9 @@ public class LopHocServiceImpl implements LopHocService{
     public void deleteLopHocById(int id) {
         lopHocRepository.deleteById(id);
     }
+
+    @Override
+    public List<lop> serchByTenLop(String name) {
+        return lopHocRepository.serchByTenLop(name);
+    }
 }

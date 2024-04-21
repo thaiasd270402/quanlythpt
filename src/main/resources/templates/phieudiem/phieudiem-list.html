@@ -37,7 +37,13 @@
                     </div>
                     <form class="d-flex" action="#" th:action="@{/phieudiem/search}" method="get">
                         <div class=" form-check">
-                            <input autocomplete="off" th:value="${keyword}" name="keyword" type="text" class="form-control" placeholder="Nhập tên cần tìm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input autocomplete="off" th:value="${tenHocSinh}" name="keyword1" type="text" class="form-control" placeholder="Nhập tên học sinh" id="keyword1" aria-describedby="emailHelp">
+                        </div>
+                        <div class=" form-check">
+                            <input autocomplete="off" th:value="${tenLop}" name="keyword2" type="text" class="form-control" placeholder="Nhập tên lớp" id="keyword2" aria-describedby="emailHelp">
+                        </div>
+                        <div class=" form-check">
+                            <input autocomplete="off" th:value="${tenMonHoc}" name="keyword3" type="text" class="form-control" placeholder="Nhập tên môn học" id="keyword3" aria-describedby="emailHelp">
                         </div>
                         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </form>

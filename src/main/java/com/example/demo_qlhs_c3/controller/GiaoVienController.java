@@ -34,6 +34,7 @@ public class GiaoVienController {
         List<giaovien> list = giaoVienService.getAllGiaoVien();
        model.addAttribute("giaoviens",list);
 
+       //chỉ có những giaovien chưa chủ nhiệm lớp nào mới có thể xóa
         List<lop> lophocs =  lopHocService.getAllLopHoc();
         List<giaovien> listGiaoVien = giaoVienService.getAllGiaoVien();
         List<giaovien> listGiaoVien1 = new ArrayList<>(listGiaoVien);

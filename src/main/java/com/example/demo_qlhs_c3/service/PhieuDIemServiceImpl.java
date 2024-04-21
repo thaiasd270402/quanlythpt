@@ -54,4 +54,39 @@ public class PhieuDIemServiceImpl implements PhieuDIemService {
     public List<phieudiem> searchPhieuDiemInForm(String name, String monhoc) {
         return phieuDiemRepository.serchPhieuDiemInForm(name, monhoc);
     }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByTenHocSinh(String name) {
+        return phieuDiemRepository.serchPhieuDiemByTenHocSinh(name);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByLop(String name) {
+        return phieuDiemRepository.serchPhieuDiemByLop(name);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByMonHoc(String name) {
+        return phieuDiemRepository.serchPhieuDiemByMonHoc(name);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByTenHocSinhAndLop(String name, String name2) {
+        return phieuDiemRepository.serchPhieuDiemByTenHocSinhAndLop(name, name2);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByTenHocSinhAndMonHoc(String name, String name2) {
+        return phieuDiemRepository.serchPhieuDiemByTenHocSinhAndMonHoc(name, name2);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByTenLopAndMonHoc(String name, String name2) {
+        return phieuDiemRepository.serchPhieuDiemByTenLopAndMonHoc(name, name2);
+    }
+
+    @Override
+    public List<phieudiem> serchPhieuDiemByTenHocSinh_Lop_MonHoc(String name, String name2, String name3) {
+        return phieuDiemRepository.serchPhieuDiemByTenHocSinh_Lop_MonHoc(name, name2, name3);
+    }
 }

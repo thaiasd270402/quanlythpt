@@ -23,52 +23,37 @@
 
             <div class="col-lg-9">
 
-                <form action="#" th:action="@{/sodaubai/save}" th:object="${sodaubai}" method="post" id="editForm">
+                <form action="#" th:action="@{/sodaubai/save-and-update}" th:object="${sodaubai}" method="post"
+                      id="editForm">
                     <input th:field="*{id}" type="text" class="form-control" id="id" name="sodaubai.id"
                            style="display: none;">
                     <div class="mb-3 mt-3">
                         <label for="tenlop" class="form-label">Tên lớp: </label>
-                        <input th:field="*{lop.id}"
+                        <input th:field="*{lop.id}" th:text="${sodaubai.lop.tenLop}"
                                type="text" class="form-control" id="tenlop"
-                               name="tenlop" readonly>
+                               name="tenlop" style="display: none;" readonly>
                     </div>
 
                     <div class="mb-3 mt-3">
-                        <label for="giaoVien" class="form-label">Lớp học</label>
+                        <label for="giaoVien" class="form-label">Tên giáo viên</label>
                         <select th:field="*{giaoVien.id}" id="giaoVien" name="giaoVien" class="form-select"
                                 aria-label="Default select example">
-                            <option th:each="giaovien : ${giaoVienList}" th:value="${giaovien.id}"
-                                    th:text="${giaovien.tenGiaoVien}"></option>
+                            <option th:each="giaovien : ${giaovienList}" th:value="${giaovien.id}"
+                                    th:text="${giaovien.tenGiaoVien + ' - (' + giaovien.monHoc.tenMonHoc + ')'}"></option>
                         </select>
                     </div>
-                    <script th:inline="javascript">
-                        var element = document.getElementById("giaoVien");
-                        var content = element.innerHTML;
-                    </script>
 
-                    <div class="mb-3 mt-3">
-                        <label for="tenMonHoc" class="form-label">Tên môn học: </label>
-                        <input th:text="${sodaubai.giaoVien.monHoc.tenMonHoc}"
-                               type="text" class="form-control" id="tenMonHoc"
-                               name="diemTrungBinh" readonly>
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label for="hocLuc" class="form-label">Học lực: </label>
-                        <input th:field="*{hocLuc}" type="text" class="form-control" id="hocLuc"
-                               name="hocLuc" readonly>
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label for="hanhKiem" class="form-label">Hạnh Kiểm: </label>
-                        <input th:field="*{hanhKiem}" type="text" class="form-control" id="hanhKiem"
-                               name="hanhKiem">
-                    </div>
 
                     <div data-mdb-input-init class="form-outline mb-3 mt-3">
-                        <label class="form-label" for="nhanXetCuaGiaoVien">Nhận xét của giáo viên: </label>
-                        <textarea th:field="*{nhanXetCuaGiaoVien}" class="form-control" id="nhanXetCuaGiaoVien"
+                        <label class="form-label" for="noiDungGiangDay">Nội dung giảng dạy: </label>
+                        <textarea th:field="*{noiDungGiangDay}" class="form-control" id="noiDungGiangDay"
                                   rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="ngayGiangDay" class="form-label">Ngày giảng dạy: </label>
+                        <input th:field="*{ngayGiangDay}" type="date" class="form-control" id="ngayGiangDay"
+                               name="ngayGiangDay">
                     </div>
 
 

@@ -185,8 +185,7 @@ public class SoHocBaConTroller {
     public String searchInForm(@RequestParam("keyword1") String tenHocSinh,
                                @RequestParam("keyword2") String tenLop, Model model) {
         List<hocsinh> hocsinhList = hocSinhService.getAllHocSinh();
-        System.out.println(tenHocSinh);
-        System.out.println(tenLop);
+
         if (tenHocSinh == null || tenHocSinh.isEmpty()) {
             hocsinhList = hocSinhService.searchLop(tenLop);
         } else if (tenLop == null || tenLop.isEmpty()) {

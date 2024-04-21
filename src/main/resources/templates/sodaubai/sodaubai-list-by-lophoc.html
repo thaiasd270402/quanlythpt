@@ -23,22 +23,19 @@
 
             <div class="col-lg-9">
                 <!--                Start-->
-<!--                <div class="d-flex justify-content-between pb-1">-->
+                <h2 style="text-align: center;">Quản lý sổ đầu bài</h2>
+                <div class=" pb-1">
 
-<!--                    <form class="d-flex" action="#" th:action="@{/sodaubai/search-in-form}" method="get">-->
-<!--                        <div class=" form-check">-->
-<!--                            <input autocomplete="off" th:value="${tenHocSinh}" name="keyword1" type="text" class="form-control"-->
-<!--                                   placeholder="Nhập tên học sinh" id="keyword1" aria-describedby="emailHelp">-->
-<!--                        </div>-->
+                    <form class="d-flex align-items-end" action="#" th:action="@{/sodaubai/search-lop}" method="get">
 
-<!--                        <div class=" form-check">-->
-<!--                            <input autocomplete="off" th:value="${tenLop}" name="keyword2" type="text" class="form-control"-->
-<!--                                   placeholder="Nhập tên lớp" id="keyword2" aria-describedby="emailHelp">-->
-<!--                        </div>-->
-<!--                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>-->
-<!--                    </form>-->
+                        <div class="">
+                            <input autocomplete="off" th:value="${tenLop}" name="keyword1" type="text" class="form-control"
+                                   placeholder="Nhập tên lớp" id="keyword1" aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    </form>
 
-<!--                </div>-->
+                </div>
                 <div class="row">
                     <div th:each="lophoc : ${lopList}" class="card col-lg-4 col-md-6 mb-4">
                         <img class="card-img-top" th:src="@{/img/sodaubai.png}" alt="">

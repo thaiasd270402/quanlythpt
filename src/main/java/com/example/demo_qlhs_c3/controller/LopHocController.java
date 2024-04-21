@@ -30,6 +30,18 @@ public class LopHocController {
     public String list(Model model) {
 
         List<lop> lophocs = lopHocService.getAllLopHoc();
+        List<hocsinh> hocsinhs = hocSinhService.getAllHocSinh();
+        for (lop lop1 : lophocs){
+            int numHs=0;
+            for (hocsinh hocsinh1 : hocsinhs){
+                if(hocsinh1.getLop().getId()==lop1.getId()){
+                    numHs+=1;
+                }
+            }
+            lop1.setSiSo(numHs);
+            int id = lop1.getId();
+            lopHocService.saveLopHoc(lop1, id);
+        }
         model.addAttribute("lophocs", lophocs);
         return ("lophoc/lophoc");
     }

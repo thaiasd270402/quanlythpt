@@ -40,7 +40,9 @@
 
                         <div class=" form-check">
                             <input type="hidden" name="tenMonHoc" th:value="${phieuDiem.monHoc.tenMonHoc}" />
-                            <input autocomplete="off" th:value="${keyword}" name="keyword" type="text" class="form-control" placeholder="Nhập tên hoặc lớp" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input autocomplete="off" th:value="${tenHocSinh}" name="keyword1" type="text" class="form-control" placeholder="Nhập tên học sinh" id="tenHocSinh" aria-describedby="emailHelp">
+
+                            <input autocomplete="off" th:value="${lopHoc}" name="keyword2" type="text" class="form-control" placeholder="Nhập tên lớp" id="tenLop" aria-describedby="emailHelp">
                         </div>
                         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </form>

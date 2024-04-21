@@ -11,7 +11,7 @@ public class thehocsinh {
     private int id;
     @Column(name = "anh_dai_dien")
     private String anhDaiDien;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_hoc_sinh", referencedColumnName = "id")
     private hocsinh hocSinh;
 

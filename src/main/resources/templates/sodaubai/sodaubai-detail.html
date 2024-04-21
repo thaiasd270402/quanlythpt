@@ -22,18 +22,20 @@
             </div>
 
             <div class="col-lg-9">
+                <div class="d-flex justify-content-between">
+                    <a th:href="@{/sodaubai/back}" type="button" class="btn btn-info" >Trở lại</a>
+                    <form class="d-flex" action="#" th:action="@{/sodaubai/search-sdb}" method="get">
+<!--                        <input autocomplete="off"  th:value="${idLop}" name="idlop" type="date" class="form-control"  id="tenLop" aria-describedby="emailHelp" style="display : none;">-->
+                        <div class=" form-check">
+                            <input autocomplete="off"  th:value="${ngayGiangDay}" name="keyword" type="date" class="form-control" placeholder="Nhập ngày cần tìm" id="exampleInputEmail1" aria-describedby="emailHelp" required>
 
-<!--                <a th:href="@{/sohocba/back}" type="button" class="btn btn-primary active mb-1" >Trở lại</a>-->
-<!--                <form action="#" th:action="@{/sohocba/update}" th:object="${sohocba}" method="post" id="editForm">-->
-<!--                    <input th:field="*{id}" type="text" class="form-control" id="id" name="sohocba.id"-->
-<!--                           style="display: none;">-->
-<!--                    <div class="mb-3 mt-3">-->
-<!--                        <label for="tenHocSinh" class="form-label">Họ và tên: </label>-->
-<!--                        <input style="display: none;" th:field="*{hocSinh.id}" th:text="${sohocba.hocSinh.tenHocSinh}"-->
-<!--                               type="text" class="form-control" id="tenHocSinh"-->
-<!--                               name="hocSinh.id" readonly>-->
-<!--                    </div>-->
-                <a th:href="@{/sodaubai/save}" type="button" class="btn btn-warning" >Thêm</a>
+                        </div>
+                        <input type="hidden"  name="idLop" th:value="${idLop}" />
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    </form>
+
+                    <a th:href="@{/sodaubai/save(id=${idLop})}" type="button" class="btn btn-success" >Thêm</a>
+                </div>
                 <table class="table table-bordered table-striped">
                     <thead class="table-danger">
                     <tr>
@@ -67,7 +69,7 @@
                         <td th:text="${#dates.format(sodaubai.ngayGiangDay, 'dd-MM-yyyy')}" />
                         <td>
                             <a th:href="@{/sodaubai/update(id=${sodaubai.id})}" type="button" class="btn btn-warning" >Chỉnh sửa</a>
-                            <a th:href="@{/sodaubai/delete(id=${sodaubai.id})}" type="button" class="btn btn-success" >Xóa </a>
+                            <a th:href="@{/sodaubai/delete(id=${sodaubai.id})}" type="button" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" class="btn btn-danger" >Xóa </a>
                         </td>
 
                     </tr>
