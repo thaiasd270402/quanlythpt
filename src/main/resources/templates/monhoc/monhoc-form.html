@@ -25,7 +25,7 @@
                 <form action="#" th:action="@{/monhoc/save}" th:object="${monhoc}" method="post" id="editForm"  >
                     <div class="mb-3">
                         <input  th:field="*{id}" placeholder="id" type="text" class="form-control" style="display: none;"/>
-                        <input  th:field="*{tenMonHoc}" placeholder="Nhập tên môn học" type="text" class="form-control"/>
+                        <input  th:field="*{tenMonHoc}" placeholder="Nhập tên môn học" type="text" class="form-control" required/>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Xác nhận</button>

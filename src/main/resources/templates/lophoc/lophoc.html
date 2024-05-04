@@ -53,9 +53,12 @@
                         <td>
 
                             <a th:href="@{/lophoc/update(id=${lophoc.id})}" type="button" class="btn btn-warning" >Chỉnh sửa</a>
-                            <a th:href="@{/lophoc/delete(id=${lophoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>
-                            <a th:href="@{/lophoc/detail(id=${lophoc.id})}" type="button" class="btn btn-primary" >Xem chi tiết</a>
 
+<!--                            <a th:href="@{/lophoc/delete(id=${lophoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>-->
+                            <a th:href="@{/lophoc/detail(id=${lophoc.id})}" type="button" class="btn btn-primary" >Xem chi tiết</a>
+                            <span th:each="lop : ${lopList}">
+                                <a th:if="${lop.id==lophoc.id}" th:href="@{/lophoc/delete(id=${lophoc.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa ?');" type="button" class="btn btn-danger" >Xóa</a>
+                            </span>
 
                         </td>
 

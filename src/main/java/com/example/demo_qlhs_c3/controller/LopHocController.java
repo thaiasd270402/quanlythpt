@@ -1,8 +1,6 @@
 package com.example.demo_qlhs_c3.controller;
 
-import com.example.demo_qlhs_c3.service.GiaoVienService;
-import com.example.demo_qlhs_c3.service.HocSinhService;
-import com.example.demo_qlhs_c3.service.LopHocService;
+import com.example.demo_qlhs_c3.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo_qlhs_c3.entity.lop;
 import com.example.demo_qlhs_c3.entity.giaovien;
 import com.example.demo_qlhs_c3.entity.hocsinh;
+import com.example.demo_qlhs_c3.entity.sodaubai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,9 @@ public class LopHocController {
 
     @Autowired
     private HocSinhService hocSinhService;
+
+    @Autowired
+    private SoDauBaiService soDauBaiService;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -43,6 +45,21 @@ public class LopHocController {
             lopHocService.saveLopHoc(lop1, id);
         }
         model.addAttribute("lophocs", lophocs);
+
+        List<lop> lopList = lopHocService.getAllLopHoc();
+        List<hocsinh> hocsinhList = hocSinhService.getAllHocSinh();
+        List<sodaubai> sodaubaiList = soDauBaiService.getAllSoDauBai();
+        List<lop> lopList1 = new ArrayList<>(lopList);
+        for (hocsinh hocsinh1 : hocsinhList){
+            for (sodaubai sodaubai1 : sodaubaiList){
+                for (lop lop1 : lopList){
+                    if(hocsinh1.getLop().getId()==lop1.getId() || lop1.getId()==sodaubai1.getLop().getId()){
+                        lopList1.remove(lop1);
+                    }
+                }
+            }
+        }
+        model.addAttribute("lopList", lopList1);
         return ("lophoc/lophoc");
     }
 

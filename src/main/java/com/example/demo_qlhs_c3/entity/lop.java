@@ -101,4 +101,6 @@ public class lop {
     public void setPhieuDiem(List<phieudiem> phieuDiem) {
         this.phieuDiem = phieuDiem;
     }
+
+
 }

@@ -1,14 +1,13 @@
 <div th:fragment="left" class="list-group ">
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/monhoc/list}" class="list-group-item list-group-item-action" >Quản lý môn học</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')"  th:href="@{/monhoc/list}" class="list-group-item list-group-item-action" >Quản lý môn học</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/giaovien/list}" class="list-group-item list-group-item-action" >Quản lý giáo viên </a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/lophoc/list}" class="list-group-item list-group-item-action" >Quản lý lớp học </a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/hocsinh/list}" class="list-group-item list-group-item-action">Quản lý học sinh</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/sohocba/list}" class="list-group-item list-group-item-action">Quản lý sổ học bạ</a>
+<!--    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/sohocba/list}" class="list-group-item list-group-item-action">Quản lý sổ học bạ</a>-->
     <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')" th:href="@{/phieudiem/list-by-monhoc}" class="list-group-item list-group-item-action">Quản lý phiếu điểm</a>
-    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')"th:href="@{/sodaubai/list}" class="list-group-item list-group-item-action">Quản lý sổ đầu bài</a>
-    <a sec:authorize="hasAnyRole('ROLE_ADMIN')"th:href="@{/thehocsinh/list}" class="list-group-item list-group-item-action">Quản lý thẻ học sinh</a>
+<!--    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')"th:href="@{/sodaubai/list}" class="list-group-item list-group-item-action">Quản lý sổ đầu bài</a>-->
+<!--    <a sec:authorize="hasAnyRole('ROLE_ADMIN')"th:href="@{/thehocsinh/list}" class="list-group-item list-group-item-action">Quản lý thẻ học sinh</a>-->
     <a sec:authorize="hasAnyRole('ROLE_ADMIN')"th:href="@{/phuhuynh/list}" class="list-group-item list-group-item-action">Quản lý phụ huynh</a>
     <a sec:authorize="hasAnyRole('ROLE_USER')"th:href="@{/tracuudiem/list}" class="list-group-item list-group-item-action">Tra cứu điểm</a>
-
 
 </div>
